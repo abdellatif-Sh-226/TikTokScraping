@@ -1,0 +1,152 @@
+2026-07-05 14:52:31 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 14:52:32 | INFO     | scraper | Browser context created.
+2026-07-05 14:52:32 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@shiliabdellatif6?lang=ar
+2026-07-05 14:52:32 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@shiliabdellatif6?lang=ar
+2026-07-05 14:53:08 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 14:53:48 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 14:53:48 | INFO     | scraper | Profile scraped: @shiliabdellatif6 —  followers,  videos.
+2026-07-05 14:53:48 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_shiliabdellatif6.json
+2026-07-05 14:53:48 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 14:54:39 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 14:54:40 | INFO     | scraper | Browser context created.
+2026-07-05 14:54:40 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@tiktok
+2026-07-05 14:54:40 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@tiktok
+2026-07-05 14:55:10 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 14:55:50 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 14:55:50 | INFO     | scraper | Profile scraped: @tiktok —  followers,  videos.
+2026-07-05 14:55:50 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_tiktok.json
+2026-07-05 14:55:50 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 14:57:23 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 14:57:23 | INFO     | scraper | Browser context created.
+2026-07-05 14:57:23 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@tiktok
+2026-07-05 14:57:23 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@tiktok
+2026-07-05 14:57:53 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 14:57:53 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 14:57:53 | INFO     | scraper | Profile scraped: @tiktok — 94.7M followers,  videos.
+2026-07-05 14:57:53 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_tiktok.json
+2026-07-05 14:57:53 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 14:59:30 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 14:59:30 | INFO     | scraper | Browser context created.
+2026-07-05 14:59:30 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 14:59:30 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 14:59:54 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 14:59:54 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 14:59:54 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 14:59:54 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 14:59:54 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:01:07 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:01:08 | INFO     | scraper | Browser context created.
+2026-07-05 15:01:08 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:01:08 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:01:38 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 15:01:38 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:01:38 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 15:01:38 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:01:38 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:02:07 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:02:07 | INFO     | scraper | Browser context created.
+2026-07-05 15:02:07 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:02:07 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:02:41 | WARNING  | scraper | Page load timeout for https://www.tiktok.com/@emilyfluri – continuing with partial DOM.
+2026-07-05 15:02:56 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 15:02:56 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:02:56 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 15:02:56 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:02:56 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:04:41 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:04:42 | INFO     | scraper | Browser context created.
+2026-07-05 15:04:42 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:04:42 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:05:10 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 15:05:10 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:05:10 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 15:05:10 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:05:10 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:05:16 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:05:17 | INFO     | scraper | Browser context created.
+2026-07-05 15:05:17 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:05:17 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:05:45 | DEBUG    | scraper | Scroll reached bottom after 2 steps.
+2026-07-05 15:05:45 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:05:45 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 15:05:45 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:05:45 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:06:45 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:06:45 | INFO     | scraper | Browser context created.
+2026-07-05 15:06:45 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:06:45 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:07:06 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:07:12 | DEBUG    | scraper | Scroll finished after 4 steps (stalled).
+2026-07-05 15:07:12 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:07:12 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers,  videos.
+2026-07-05 15:07:12 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:07:12 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:07:34 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:07:35 | INFO     | scraper | Browser context created.
+2026-07-05 15:07:35 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:07:35 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:08:01 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:08:03 | DEBUG    | scraper | Scroll  1: height=1472 scrollY=392 bottom=True
+2026-07-05 15:08:04 | DEBUG    | scraper | Scroll  2: height=1472 scrollY=392 bottom=True
+2026-07-05 15:08:06 | DEBUG    | scraper | Scroll  3: height=1472 scrollY=392 bottom=True
+2026-07-05 15:08:07 | DEBUG    | scraper | Scroll  4: height=1472 scrollY=392 bottom=True
+2026-07-05 15:08:07 | DEBUG    | scraper | Scroll finished after 4 steps (stalled at bottom).
+2026-07-05 15:08:07 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:08:07 | INFO     | scraper | Profile scraped: @emilyfluri | followers=12.1K | tiles=0
+2026-07-05 15:08:07 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:08:08 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:08:27 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:08:28 | INFO     | scraper | Browser context created.
+2026-07-05 15:08:28 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:08:28 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:08:54 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:08:56 | DEBUG    | scraper | Scroll  1: height=1472 consecutive_same=0
+2026-07-05 15:08:57 | DEBUG    | scraper | Scroll  2: height=1472 consecutive_same=0
+2026-07-05 15:08:59 | DEBUG    | scraper | Scroll  3: height=1472 consecutive_same=1
+2026-07-05 15:09:00 | DEBUG    | scraper | Scroll  4: height=1472 consecutive_same=2
+2026-07-05 15:09:02 | DEBUG    | scraper | Scroll  5: height=1472 consecutive_same=3
+2026-07-05 15:09:03 | DEBUG    | scraper | Scroll  6: height=1472 consecutive_same=4
+2026-07-05 15:09:03 | DEBUG    | scraper | Scroll finished after 6 steps (stalled).
+2026-07-05 15:09:03 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:09:03 | INFO     | scraper | Profile scraped: @emilyfluri | followers=12.1K | tiles=0
+2026-07-05 15:09:03 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:09:04 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:09:34 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:09:35 | INFO     | scraper | Browser context created.
+2026-07-05 15:09:35 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:09:35 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:09:51 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:09:53 | DEBUG    | scraper | Scroll  1: height=1472 consecutive_same=0
+2026-07-05 15:09:55 | DEBUG    | scraper | Scroll  2: height=1472 consecutive_same=0
+2026-07-05 15:09:57 | DEBUG    | scraper | Scroll  3: height=1472 consecutive_same=1
+2026-07-05 15:09:59 | DEBUG    | scraper | Scroll  4: height=1472 consecutive_same=2
+2026-07-05 15:10:01 | DEBUG    | scraper | Scroll  5: height=1472 consecutive_same=3
+2026-07-05 15:10:03 | DEBUG    | scraper | Scroll  6: height=1472 consecutive_same=4
+2026-07-05 15:10:03 | DEBUG    | scraper | Scroll finished after 6 steps (stalled).
+2026-07-05 15:10:06 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-05 15:10:06 | INFO     | scraper | Profile scraped: @emilyfluri | followers=12.1K | tiles=0
+2026-07-05 15:10:06 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:10:06 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:13:26 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:13:26 | INFO     | scraper | Browser context created.
+2026-07-05 15:18:08 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:18:09 | INFO     | scraper | Browser context created.
+2026-07-05 15:18:09 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@emilyfluri
+2026-07-05 15:18:09 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@emilyfluri
+2026-07-05 15:18:12 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 15:18:34 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:19:18 | DEBUG    | scraper | Found 339 video tiles.
+2026-07-05 15:19:30 | INFO     | scraper | Profile scraped: @emilyfluri — 12.1K followers, 339 video tiles.
+2026-07-05 15:19:30 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_emilyfluri.json
+2026-07-05 15:19:31 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 15:27:42 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 15:27:43 | INFO     | scraper | Browser context created.
+2026-07-05 15:27:43 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@iam_notkira
+2026-07-05 15:27:43 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira
+2026-07-05 15:27:45 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 15:28:08 | DEBUG    | scraper | Videos tab already active.
+2026-07-05 15:28:47 | DEBUG    | scraper | Scroll finished after 19 steps.
+2026-07-05 15:28:50 | DEBUG    | scraper | Found 208 video tiles.
+2026-07-05 15:28:55 | INFO     | scraper | Profile scraped: @iam_notkira — 48.5K followers, 208 video tiles.
+2026-07-05 15:28:55 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_iam_notkira.json
+2026-07-05 15:28:56 | INFO     | scraper | TikTokScraper stopped.
