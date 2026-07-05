@@ -113,6 +113,16 @@ class Selectors:
     video_date: str = '[data-e2e="video-date"]'
     video_comments_section: str = '[data-e2e="comments-list"]'
 
+    # --- Comments ---
+    comment_wrapper: str = 'div[class*="DivCommentObjectWrapper"]'
+    """The full wrapper div for one comment."""
+    comment_author: str = 'p.TUXText--weight-medium'
+    """Username text inside a comment."""
+    comment_author_avatar: str = 'img'
+    """Avatar image inside a comment."""
+    comment_text: str = 'span.TUXText--weight-normal'
+    """Comment body text."""
+
     # --- Generic ---
     error_page: str = 'div.error_container'
 
@@ -132,8 +142,8 @@ class Config:
 
     browser_headless: bool = True
     """Run Playwright in headless mode."""
-    user_data_dir: str = "browser_data"
-    """Directory for persistent browser context (cookies / cache)."""
+    storage_state_file: str = "tiktok_session.json"
+    """File to save/restore browser session (cookies, localStorage)."""
 
 
 # Singleton-style convenience instance

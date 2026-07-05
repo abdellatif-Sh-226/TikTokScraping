@@ -150,3 +150,92 @@
 2026-07-05 15:28:55 | INFO     | scraper | Profile scraped: @iam_notkira — 48.5K followers, 208 video tiles.
 2026-07-05 15:28:55 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\profile_iam_notkira.json
 2026-07-05 15:28:56 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 16:54:24 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 16:54:25 | INFO     | scraper | Browser context created.
+2026-07-05 16:54:25 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 16:54:26 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 16:54:26 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 16:55:28 | INFO     | scraper | Video scraped: 7656966967823289630 —  plays, 1159 likes.
+2026-07-05 16:55:28 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
+2026-07-05 16:55:29 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:00:27 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:00:28 | INFO     | scraper | Browser context created.
+2026-07-05 17:00:28 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:00:28 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:00:29 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 17:00:52 | DEBUG    | scraper | Comments section not found, skipping scroll.
+2026-07-05 17:00:52 | DEBUG    | scraper | Found 0 comments.
+2026-07-05 17:01:32 | INFO     | scraper | Video scraped: 7656966967823289630 —  plays, 1161 likes, 0 comments.
+2026-07-05 17:01:32 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
+2026-07-05 17:01:32 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:02:49 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:02:50 | INFO     | scraper | Browser context created.
+2026-07-05 17:02:50 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:02:50 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:02:50 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 17:03:12 | DEBUG    | scraper | Comments section not found, skipping scroll.
+2026-07-05 17:03:12 | DEBUG    | scraper | Found 0 comments.
+2026-07-05 17:03:53 | INFO     | scraper | Video scraped: 7656966967823289630 —  plays, 1161 likes, 0 comments.
+2026-07-05 17:03:53 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
+2026-07-05 17:03:53 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:12:10 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:12:11 | INFO     | scraper | Browser context created.
+2026-07-05 17:12:11 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:12:11 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:12:12 | INFO     | scraper | Waiting 60 s for manual CAPTCHA solving …
+2026-07-05 17:13:24 | DEBUG    | scraper | Comments section not found, skipping scroll.
+2026-07-05 17:13:24 | DEBUG    | scraper | Found 0 comments.
+2026-07-05 17:16:14 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:16:14 | ERROR    | __main__ | Fatal error during scraping.
+Traceback (most recent call last):
+  File "C:\Users\wess\Desktop\python get data\main.py", line 78, in _amain
+    await scraper.start()
+  File "C:\Users\wess\Desktop\python get data\scraper.py", line 166, in start
+    self._browser = await self._playwright.chromium.launch(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\wess\AppData\Local\Programs\Python\Python314\Lib\site-packages\playwright\async_api\_generated.py", line 16546, in launch
+    await self._impl_obj.launch(
+    ...<17 lines>...
+    )
+  File "C:\Users\wess\AppData\Local\Programs\Python\Python314\Lib\site-packages\playwright\_impl\_browser_type.py", line 97, in launch
+    await self._channel.send(
+        "launch", TimeoutSettings.launch_timeout, params
+    )
+  File "C:\Users\wess\AppData\Local\Programs\Python\Python314\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\wess\AppData\Local\Programs\Python\Python314\Lib\site-packages\playwright\_impl\_connection.py", line 563, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: BrowserType.launch: Chromium distribution 'chrome' is not found at C:\Users\wess\AppData\Local\Google\Chrome\Application\chrome.exe
+Run "playwright install chrome"
+2026-07-05 17:16:14 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:27:13 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:27:13 | INFO     | scraper | Browser context created.
+2026-07-05 17:27:13 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:27:14 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:27:15 | INFO     | scraper | Waiting 60 s for manual CAPTCHA solving …
+2026-07-05 17:28:27 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-count"]'.
+2026-07-05 17:28:30 | DEBUG    | scraper | Found 0 comment items via selector.
+2026-07-05 17:28:30 | DEBUG    | scraper | No structured comments found, trying text-based extraction.
+2026-07-05 17:29:10 | INFO     | scraper | Video scraped: 7656966967823289630 —  plays, 1168 likes, 3 comments.
+2026-07-05 17:29:10 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
+2026-07-05 17:29:11 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-05 17:29:11 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:41:24 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:41:25 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-05 17:41:25 | INFO     | scraper | Browser context created.
+2026-07-05 17:41:25 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:41:25 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7656966967823289630
+2026-07-05 17:41:26 | INFO     | scraper | Waiting 15 s for manual CAPTCHA solving …
+2026-07-05 17:41:54 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-count"]'.
+2026-07-05 17:41:57 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-05 17:42:37 | INFO     | scraper | Video scraped: 7656966967823289630 —  plays, 1170 likes, 20 comments.
+2026-07-05 17:42:37 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
+2026-07-05 17:42:38 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-05 17:42:38 | INFO     | scraper | TikTokScraper stopped.

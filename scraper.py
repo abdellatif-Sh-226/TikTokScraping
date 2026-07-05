@@ -10,7 +10,10 @@ automatic scrolling, retry logic, and centralised selector management.
 """
 
 import asyncio
+import json
+import os
 import re
+from pathlib import Path
 from typing import Optional
 from urllib.parse import urlparse
 
@@ -24,7 +27,7 @@ from playwright.async_api import (
 )
 
 from config import CONFIG, Config
-from models import Profile, VideoDetail, VideoTile
+from models import Comment, Profile, VideoDetail, VideoTile
 from utils import async_retry, get_logger, save_json
 
 logger = get_logger(__name__)
@@ -164,7 +167,19 @@ class TikTokScraper:
             headless=self._config.browser_headless,
             args=launch_args,
         )
+
+        # Load saved session (cookies + localStorage) if available
+        storage_state = None
+        state_path = Path(self._config.storage_state_file)
+        if state_path.exists():
+            try:
+                storage_state = json.loads(state_path.read_text(encoding="utf-8"))
+                logger.info("Loaded saved session from %s", state_path)
+            except Exception as exc:
+                logger.warning("Failed to load saved session: %s", exc)
+
         self._context = await self._browser.new_context(
+            storage_state=storage_state,
             user_agent=(
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -178,12 +193,25 @@ class TikTokScraper:
         logger.info("Browser context created.")
 
     async def stop(self) -> None:
-        """Close the browser and stop Playwright."""
+        """Save session, close the browser and stop Playwright."""
+        await self._save_session()
         if self._browser:
             await self._browser.close()
         if self._playwright:
             await self._playwright.stop()
         logger.info("TikTokScraper stopped.")
+
+    async def _save_session(self) -> None:
+        """Persist the current browser session (cookies + localStorage) to disk."""
+        if not self._context:
+            return
+        try:
+            state = await self._context.storage_state()
+            state_path = Path(self._config.storage_state_file)
+            state_path.write_text(json.dumps(state, indent=2), encoding="utf-8")
+            logger.info("Session saved to %s", state_path)
+        except Exception as exc:
+            logger.warning("Failed to save session: %s", exc)
 
     # ------------------------------------------------------------------
     # Public API
@@ -267,6 +295,10 @@ class TikTokScraper:
                 await page.wait_for_timeout(self._captcha_wait * 1000)
             await self._dismiss_cookie_banner(page)
 
+            # Click the comment button to open the comment panel
+            await self._open_comments_panel(page)
+            comments_data = await self._extract_comments(page)
+
             video = VideoDetail(
                 url=url,
                 id=video_id,
@@ -280,13 +312,15 @@ class TikTokScraper:
                 saves=await _safe_text(page, _SEL.video_saves),
                 sound=await _safe_text(page, _SEL.video_sound),
                 date=await _safe_text(page, _SEL.video_date),
+                comments_list=comments_data,
             )
 
             logger.info(
-                "Video scraped: %s — %s plays, %s likes.",
+                "Video scraped: %s — %s plays, %s likes, %d comments.",
                 video.id,
                 video.plays,
                 video.likes,
+                len(comments_data),
             )
 
             if save:
@@ -450,4 +484,75 @@ class TikTokScraper:
             except Exception as exc:
                 logger.debug("Skipping video tile %d due to: %s", i, exc)
                 continue
+        return results
+
+    async def _open_comments_panel(self, page: Page) -> None:
+        """
+        Click the comment button to open the comments sidebar/panel.
+
+        On TikTok video pages, comments are NOT in the initial DOM.
+        Clicking the comment count or icon opens a side panel that loads
+        comments via API. This method clicks that button and waits.
+        """
+        for sel in ['[data-e2e="comment-count"]', '[data-e2e="comment-icon"]']:
+            try:
+                btn = page.locator(sel).first
+                if await btn.count() > 0:
+                    await btn.click()
+                    logger.debug("Opened comments via '%s'.", sel)
+                    await page.wait_for_timeout(3000)
+                    return
+            except Exception:
+                continue
+        logger.debug("Could not find comment button to click.")
+
+    async def _extract_comments(self, page: Page) -> list:
+        """
+        Extract comments from the page after the comment panel has opened.
+
+        Iterates over each comment wrapper div and extracts:
+        - author username (from p.TUXText--weight-medium)
+        - author avatar (from img)
+        - comment text (from span.TUXText--weight-normal)
+        """
+        results: list = []
+
+        wrappers = page.locator(_SEL.comment_wrapper)
+        count = await wrappers.count()
+        logger.debug("Found %d comment wrappers.", count)
+
+        for i in range(count):
+            try:
+                wrapper = wrappers.nth(i)
+
+                # Author username
+                author = ""
+                author_el = wrapper.locator(_SEL.comment_author).first
+                if await author_el.count():
+                    author = (await author_el.inner_text()).strip()
+
+                # Author avatar
+                avatar = None
+                avatar_el = wrapper.locator(_SEL.comment_author_avatar).first
+                if await avatar_el.count():
+                    avatar = await avatar_el.get_attribute("src")
+
+                # Comment text
+                text = ""
+                text_el = wrapper.locator(_SEL.comment_text).first
+                if await text_el.count():
+                    text = (await text_el.inner_text()).strip()
+
+                if text:
+                    results.append(
+                        Comment(
+                            author_username=author,
+                            author_avatar=avatar,
+                            text=text,
+                        )
+                    )
+            except Exception as exc:
+                logger.debug("Skipping comment wrapper %d: %s", i, exc)
+                continue
+
         return results

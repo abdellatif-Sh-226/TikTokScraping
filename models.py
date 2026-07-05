@@ -28,6 +28,22 @@ class VideoTile(BaseModel):
     """View count as displayed (may include abbreviations such as '1.2M')."""
 
 
+class Comment(BaseModel):
+    """
+    A single comment on a TikTok video.
+    """
+    author_username: str = ""
+    """Username of the commenter."""
+    author_avatar: Optional[str] = None
+    """URL of the commenter's avatar."""
+    text: str = ""
+    """The comment text."""
+    likes: str = ""
+    """Like count on this comment."""
+    replies_count: str = ""
+    """Number of replies to this comment."""
+
+
 class VideoDetail(BaseModel):
     """
     Full metadata scraped from a dedicated video detail page.
@@ -56,6 +72,8 @@ class VideoDetail(BaseModel):
     """Name of the background sound / music."""
     date: Optional[str] = None
     """Upload date as displayed on the page."""
+    comments_list: List[Comment] = Field(default_factory=list)
+    """List of comments scraped from the video page."""
     scraped_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
     """ISO-8601 timestamp of when the data was scraped."""
 
