@@ -114,14 +114,26 @@ class Selectors:
     video_comments_section: str = '[data-e2e="comments-list"]'
 
     # --- Comments ---
-    comment_wrapper: str = 'div[class*="DivCommentObjectWrapper"]'
-    """The full wrapper div for one comment."""
+    comment_open_icon: str = '[data-e2e="comment-icon"]'
+    """Button/icon to click to open the comments panel."""
+    comment_wrapper: str = 'div[class*="DivCommentItemWrapper"]'
+    """Full wrapper div around a single comment."""
     comment_author: str = 'p.TUXText--weight-medium'
-    """Username text inside a comment."""
+    """Username text element inside a comment wrapper."""
     comment_author_avatar: str = 'img'
-    """Avatar image inside a comment."""
+    """Avatar image inside a comment wrapper."""
     comment_text: str = 'span.TUXText--weight-normal'
-    """Comment body text."""
+    """Comment body text element."""
+
+    # --- Cookie banner ---
+    cookie_reject: str = 'button:has-text("Reject")'
+    """'Reject all' button on the cookie consent banner."""
+    cookie_decline: str = 'button:has-text("Decline")'
+    """'Decline' button on the cookie consent banner."""
+    cookie_accept: str = 'button:has-text("Accept")'
+    """'Accept all' button (fallback if Reject/Decline absent)."""
+    cookie_banner_btn: str = '[data-e2e="cookie-banner"] button'
+    """Generic cookie banner button fallback."""
 
     # --- Generic ---
     error_page: str = 'div.error_container'
@@ -140,7 +152,7 @@ class Config:
     output: OutputConfig = field(default_factory=OutputConfig)
     selectors: Selectors = field(default_factory=Selectors)
 
-    browser_headless: bool = True
+    browser_headless: bool = False
     """Run Playwright in headless mode."""
     storage_state_file: str = "tiktok_session.json"
     """File to save/restore browser session (cookies, localStorage)."""

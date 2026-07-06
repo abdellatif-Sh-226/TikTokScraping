@@ -46,13 +46,8 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--headless",
         action="store_true",
-        default=True,
-        help="Run browser in headless mode (default).",
-    )
-    parser.add_argument(
-        "--visible",
-        action="store_true",
-        help="Run browser with visible UI (overrides --headless).",
+        default=False,
+        help="Run browser in headless mode (invisible).",
     )
     parser.add_argument(
         "--captcha-wait",
@@ -68,11 +63,8 @@ async def _amain() -> None:
     parser = _build_parser()
     args = parser.parse_args()
 
-    # Determine headless mode
-    headless = not args.visible if args.visible else args.headless
-
     scraper = TikTokScraper(captcha_wait=args.captcha_wait)
-    scraper._config.browser_headless = headless
+    scraper._config.browser_headless = args.headless
 
     try:
         await scraper.start()

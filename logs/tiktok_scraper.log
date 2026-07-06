@@ -239,3 +239,114 @@ Run "playwright install chrome"
 2026-07-05 17:42:37 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7656966967823289630.json
 2026-07-05 17:42:38 | INFO     | scraper | Session saved to tiktok_session.json
 2026-07-05 17:42:38 | INFO     | scraper | TikTokScraper stopped.
+2026-07-05 17:52:00 | INFO     | scraper | Starting TikTokScraper …
+2026-07-05 17:52:00 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-05 17:52:01 | INFO     | scraper | Browser context created.
+2026-07-05 17:52:01 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7645170711409069343?image_index=2
+2026-07-05 17:52:01 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7645170711409069343?image_index=2
+2026-07-05 17:52:03 | INFO     | scraper | Waiting 10 s for manual CAPTCHA solving …
+2026-07-05 17:52:25 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-count"]'.
+2026-07-05 17:52:28 | DEBUG    | scraper | Found 4 comment wrappers.
+2026-07-05 17:53:08 | INFO     | scraper | Video scraped: 7645170711409069343 —  plays, 138 likes, 4 comments.
+2026-07-05 17:53:08 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7645170711409069343.json
+2026-07-05 17:53:09 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-05 17:53:09 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:11:44 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:11:47 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:11:47 | INFO     | scraper | Browser context created.
+2026-07-06 11:11:47 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:11:47 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:12:03 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-count"]'.
+2026-07-06 11:12:07 | DEBUG    | scraper | Found 10 comment wrappers.
+2026-07-06 11:12:47 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1685 likes, 0 comments.
+2026-07-06 11:12:47 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:12:47 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:12:47 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:13:40 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:13:40 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:13:40 | INFO     | scraper | Browser context created.
+2026-07-06 11:13:40 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:13:41 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:13:53 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-count"]'.
+2026-07-06 11:13:56 | DEBUG    | scraper | Found 10 comment wrappers.
+2026-07-06 11:14:36 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1685 likes, 0 comments.
+2026-07-06 11:14:36 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:14:37 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:14:37 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:15:28 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:15:29 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:15:29 | INFO     | scraper | Browser context created.
+2026-07-06 11:15:29 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:15:29 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:16:43 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-06 11:16:43 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-06 11:17:23 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1685 likes, 0 comments.
+2026-07-06 11:17:23 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:17:23 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:17:23 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:30:51 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:30:51 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:30:51 | INFO     | scraper | Browser context created.
+2026-07-06 11:30:51 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:30:52 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:32:07 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-06 11:32:07 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-06 11:32:47 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1687 likes, 0 comments.
+2026-07-06 11:32:47 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:32:47 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:32:47 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:33:18 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:33:19 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:33:19 | INFO     | scraper | Browser context created.
+2026-07-06 11:33:19 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:33:19 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:33:33 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 11:33:37 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-06 11:34:17 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1687 likes, 0 comments.
+2026-07-06 11:34:17 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:34:17 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:34:17 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:35:33 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:35:33 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:35:34 | INFO     | scraper | Browser context created.
+2026-07-06 11:35:34 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:35:34 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:35:48 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 11:35:52 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-06 11:36:32 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1687 likes, 0 comments.
+2026-07-06 11:36:32 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:36:32 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:36:32 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:40:18 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:40:19 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:40:19 | INFO     | scraper | Browser context created.
+2026-07-06 11:40:19 | INFO     | scraper | Scraping video: https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:40:19 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@sagacity698/video/7650112515153595670
+2026-07-06 11:40:35 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 11:40:39 | DEBUG    | scraper | Found 10 comment wrappers.
+2026-07-06 11:41:20 | INFO     | scraper | Video scraped: 7650112515153595670 —  plays, 1687 likes, 0 comments.
+2026-07-06 11:41:20 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7650112515153595670.json
+2026-07-06 11:41:21 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:41:21 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:42:28 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:42:29 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:42:29 | INFO     | scraper | Browser context created.
+2026-07-06 11:42:29 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7645170711409069343
+2026-07-06 11:42:29 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7645170711409069343
+2026-07-06 11:42:42 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 11:42:46 | DEBUG    | scraper | Found 4 comment wrappers.
+2026-07-06 11:43:27 | INFO     | scraper | Video scraped: 7645170711409069343 —  plays, 143 likes, 4 comments.
+2026-07-06 11:43:27 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7645170711409069343.json
+2026-07-06 11:43:27 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:43:27 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 11:56:03 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 11:56:04 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 11:56:04 | INFO     | scraper | Browser context created.
+2026-07-06 11:56:04 | INFO     | scraper | Scraping video: https://www.tiktok.com/@iam_notkira/video/7645170711409069343
+2026-07-06 11:56:04 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@iam_notkira/video/7645170711409069343
+2026-07-06 11:56:17 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 11:56:21 | DEBUG    | scraper | Found 4 comment wrappers.
+2026-07-06 11:57:01 | INFO     | scraper | Video scraped: 7645170711409069343 —  plays, 143 likes, 4 comments.
+2026-07-06 11:57:01 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7645170711409069343.json
+2026-07-06 11:57:02 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 11:57:02 | INFO     | scraper | TikTokScraper stopped.

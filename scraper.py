@@ -356,10 +356,10 @@ class TikTokScraper:
         This is a best-effort step – failure is non-fatal.
         """
         dismiss_selectors = [
-            'button:has-text("Reject")',
-            'button:has-text("Decline")',
-            'button:has-text("Accept")',  # Only click Accept if Reject is absent
-            '[data-e2e="cookie-banner"] button',
+            _SEL.cookie_reject,
+            _SEL.cookie_decline,
+            _SEL.cookie_accept,
+            _SEL.cookie_banner_btn,
         ]
         for sel in dismiss_selectors:
             try:
@@ -494,13 +494,15 @@ class TikTokScraper:
         Clicking the comment count or icon opens a side panel that loads
         comments via API. This method clicks that button and waits.
         """
-        for sel in ['[data-e2e="comment-count"]', '[data-e2e="comment-icon"]']:
+        for sel in [_SEL.comment_open_icon, _SEL.video_comments]:
             try:
                 btn = page.locator(sel).first
                 if await btn.count() > 0:
-                    await btn.click()
+                    await btn.scroll_into_view_if_needed()
+                    await page.wait_for_timeout(500)
+                    await btn.click(force=True)
                     logger.debug("Opened comments via '%s'.", sel)
-                    await page.wait_for_timeout(3000)
+                    await page.wait_for_timeout(4000)
                     return
             except Exception:
                 continue
