@@ -350,3 +350,106 @@ Run "playwright install chrome"
 2026-07-06 11:57:01 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7645170711409069343.json
 2026-07-06 11:57:02 | INFO     | scraper | Session saved to tiktok_session.json
 2026-07-06 11:57:02 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 12:09:32 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 12:09:33 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 12:09:33 | INFO     | scraper | Browser context created.
+2026-07-06 12:09:33 | INFO     | scraper | Scraping video: https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:09:33 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:09:47 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 12:09:51 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 12:10:32 | INFO     | scraper | Video scraped: 7658517265356229895 —  plays, 5825 likes, 20 comments.
+2026-07-06 12:10:32 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658517265356229895.json
+2026-07-06 12:10:32 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 12:10:33 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 12:11:27 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 12:11:28 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 12:11:28 | INFO     | scraper | Browser context created.
+2026-07-06 12:11:28 | INFO     | scraper | Scraping video: https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:11:28 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:11:41 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 12:11:45 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 12:12:26 | INFO     | scraper | Video scraped: 7658517265356229895 —  plays, 5831 likes, 20 comments.
+2026-07-06 12:12:26 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658517265356229895.json
+2026-07-06 12:12:26 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 12:12:27 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 12:13:35 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 12:13:36 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 12:13:36 | INFO     | scraper | Browser context created.
+2026-07-06 12:13:36 | INFO     | scraper | Scraping video: https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:13:36 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:13:51 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 12:13:55 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 12:14:35 | INFO     | scraper | Video scraped: 7658517265356229895 —  plays, 5840 likes, 20 comments.
+2026-07-06 12:14:35 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658517265356229895.json
+2026-07-06 12:14:36 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 12:14:36 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 12:18:03 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 12:18:03 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 12:18:04 | INFO     | scraper | Browser context created.
+2026-07-06 12:18:04 | INFO     | __main__ | Waiting 200 s for manual login …
+2026-07-06 12:21:25 | INFO     | scraper | Scraping video: https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:21:25 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:21:39 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 12:21:43 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 12:22:23 | INFO     | scraper | Video scraped: 7658517265356229895 —  plays, 5880 likes, 20 comments.
+2026-07-06 12:22:23 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658517265356229895.json
+2026-07-06 12:22:24 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 12:22:24 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 12:24:49 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 12:24:50 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 12:24:50 | INFO     | scraper | Browser context created.
+2026-07-06 12:24:50 | INFO     | scraper | Scraping video: https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:24:50 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@fikramxrealme/video/7658517265356229895
+2026-07-06 12:25:04 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 12:25:08 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 12:25:48 | INFO     | scraper | Video scraped: 7658517265356229895 —  plays, 5894 likes, 20 comments.
+2026-07-06 12:25:48 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658517265356229895.json
+2026-07-06 12:25:49 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 12:25:49 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 13:05:59 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 13:06:00 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 13:06:00 | INFO     | scraper | Browser context created.
+2026-07-06 13:06:00 | INFO     | scraper | Scraping video: https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:06:01 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:06:14 | INFO     | scraper | Video liked.
+2026-07-06 13:06:16 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 13:06:20 | WARNING  | scraper | Failed to post comment: Locator.fill: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]
+Call log:
+  - waiting for locator("[data-e2e=\"comment-input\"]").first
+    - locator resolved to <div data-e2e="comment-input" class="comment-panel-input css-xfaik7-7937d88b--DivTextInputContainer e1jg1wm01">…</div>
+    - fill("norway win  :)")
+  - attempting fill action
+    - waiting for element to be visible, enabled and editable
+
+2026-07-06 13:06:20 | DEBUG    | scraper | Found 20 comment wrappers.
+2026-07-06 13:07:01 | INFO     | scraper | Video scraped: 7658842984875576594 —  plays, 106.9K likes, 20 comments.
+2026-07-06 13:07:01 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658842984875576594.json
+2026-07-06 13:07:02 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 13:07:02 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 13:07:17 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 13:07:18 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 13:07:18 | INFO     | scraper | Browser context created.
+2026-07-06 13:07:18 | INFO     | scraper | Scraping video: https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:07:18 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:07:32 | DEBUG    | scraper | Like button not found.
+2026-07-06 13:07:32 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-06 13:07:32 | DEBUG    | scraper | Comment input not found.
+2026-07-06 13:07:32 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-06 13:08:22 | INFO     | scraper | Video scraped: 7658842984875576594 —  plays, 106.9K likes, 0 comments.
+2026-07-06 13:08:22 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658842984875576594.json
+2026-07-06 13:08:23 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 13:08:23 | INFO     | scraper | TikTokScraper stopped.
+2026-07-06 13:08:49 | INFO     | scraper | Starting TikTokScraper …
+2026-07-06 13:08:50 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-06 13:08:50 | INFO     | scraper | Browser context created.
+2026-07-06 13:08:50 | INFO     | scraper | Scraping video: https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:08:51 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@a____y_14/video/7658842984875576594
+2026-07-06 13:09:06 | INFO     | scraper | Video liked.
+2026-07-06 13:09:09 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-06 13:09:14 | DEBUG    | scraper | Typed comment text.
+2026-07-06 13:09:15 | INFO     | scraper | Comment posted.
+2026-07-06 13:09:17 | DEBUG    | scraper | Found 21 comment wrappers.
+2026-07-06 13:09:57 | INFO     | scraper | Video scraped: 7658842984875576594 —  plays, 107K likes, 21 comments.
+2026-07-06 13:09:57 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658842984875576594.json
+2026-07-06 13:09:58 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-06 13:09:58 | INFO     | scraper | TikTokScraper stopped.

@@ -113,6 +113,14 @@ class Selectors:
     video_date: str = '[data-e2e="video-date"]'
     video_comments_section: str = '[data-e2e="comments-list"]'
 
+    # --- Actions (like, comment) ---
+    like_button: str = '[data-e2e="like-count"]'
+    """Clickable container for the like button on the video page."""
+    comment_input: str = '[data-e2e="comment-input"]'
+    """Text input field to type a comment."""
+    comment_post_button: str = 'button[data-e2e="comment-post"]'
+    """Submit button to post the typed comment."""
+
     # --- Comments ---
     comment_open_icon: str = '[data-e2e="comment-icon"]'
     """Button/icon to click to open the comments panel."""

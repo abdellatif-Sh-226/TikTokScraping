@@ -9,9 +9,11 @@ Usage
 Optional flags
 --------------
     --no-save          Print data to stdout without writing JSON files.
-    --headless         Run in headless mode (default: True).
-    --visible          Run with visible browser (overrides headless).
+    --headless         Run in headless mode (invisible).
     --captcha-wait N   Wait N seconds after page load for manual CAPTCHA solve.
+    --login-wait N     Wait N seconds on TikTok.com for manual login.
+    --like             Like the video after loading.
+    --comment TEXT     Post a comment on the video.
 """
 
 import argparse
@@ -56,6 +58,25 @@ def _build_parser() -> argparse.ArgumentParser:
         metavar="SECONDS",
         help="Wait N seconds after page load for manual CAPTCHA solving.",
     )
+    parser.add_argument(
+        "--login-wait",
+        type=int,
+        default=0,
+        metavar="SECONDS",
+        help="Wait N seconds before scraping so you can log in manually.",
+    )
+    parser.add_argument(
+        "--like",
+        action="store_true",
+        help="Like the video after loading the page.",
+    )
+    parser.add_argument(
+        "--comment",
+        type=str,
+        default="",
+        metavar="TEXT",
+        help="Post a comment on the video.",
+    )
     return parser
 
 
@@ -69,10 +90,23 @@ async def _amain() -> None:
     try:
         await scraper.start()
 
+        # If --login-wait, go to TikTok.com first and wait for manual login
+        if args.login_wait:
+            logger.info("Waiting %d s for manual login …", args.login_wait)
+            page = await scraper._context.new_page()
+            await page.goto("https://www.tiktok.com", wait_until="domcontentloaded")
+            await page.wait_for_timeout(args.login_wait * 1000)
+            await page.close()
+
         if args.type == "profile":
             result = await scraper.scrape_profile(args.url, save=not args.no_save)
         else:
-            result = await scraper.scrape_video(args.url, save=not args.no_save)
+            result = await scraper.scrape_video(
+                args.url,
+                save=not args.no_save,
+                like=args.like,
+                comment=args.comment,
+            )
 
         # If --no-save, print JSON to stdout
         if args.no_save:

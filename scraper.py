@@ -271,7 +271,10 @@ class TikTokScraper:
         finally:
             await page.close()
 
-    async def scrape_video(self, url: str, save: bool = True) -> VideoDetail:
+    async def scrape_video(
+        self, url: str, save: bool = True,
+        like: bool = False, comment: str = "",
+    ) -> VideoDetail:
         """
         Scrape a TikTok video detail page and return a ``VideoDetail`` instance.
 
@@ -282,6 +285,10 @@ class TikTokScraper:
             ``https://www.tiktok.com/@username/video/1234567890``.
         save:
             If ``True`` (default), write the result to a JSON file.
+        like:
+            If ``True``, click the like button on the video.
+        comment:
+            If non-empty, post this comment on the video.
         """
         video_id = _extract_video_id(url)
         logger.info("Scraping video: %s", url)
@@ -295,8 +302,15 @@ class TikTokScraper:
                 await page.wait_for_timeout(self._captcha_wait * 1000)
             await self._dismiss_cookie_banner(page)
 
-            # Click the comment button to open the comment panel
-            await self._open_comments_panel(page)
+            # Like the video if requested
+            if like:
+                await self._like_video(page)
+
+            # Open comments panel if we need to comment or scrape comments
+            if comment:
+                await self._open_comments_panel(page)
+                await self._comment_on_video(page, comment)
+
             comments_data = await self._extract_comments(page)
 
             video = VideoDetail(
@@ -507,6 +521,64 @@ class TikTokScraper:
             except Exception:
                 continue
         logger.debug("Could not find comment button to click.")
+
+    async def _like_video(self, page: Page) -> None:
+        """
+        Click the like button on the video page.
+
+        Checks if the video is already liked (aria-pressed="true")
+        and skips if so.
+        """
+        try:
+            btn = page.locator(_SEL.like_button).first
+            if await btn.count() == 0:
+                logger.debug("Like button not found.")
+                return
+            pressed = await btn.get_attribute("aria-pressed")
+            if pressed == "true":
+                logger.info("Video already liked, skipping.")
+                return
+            await btn.scroll_into_view_if_needed()
+            await btn.click(force=True)
+            logger.info("Video liked.")
+            await page.wait_for_timeout(1500)
+        except Exception as exc:
+            logger.warning("Failed to like video: %s", exc)
+
+    async def _comment_on_video(self, page: Page, text: str) -> None:
+        """
+        Type and post a comment on the video.
+
+        The comments panel must already be open (call
+        ``_open_comments_panel`` beforehand).
+        """
+        try:
+            input_el = page.locator(_SEL.comment_input).first
+            if await input_el.count() == 0:
+                logger.debug("Comment input not found.")
+                return
+            await input_el.scroll_into_view_if_needed()
+            await input_el.click()
+            await page.wait_for_timeout(500)
+
+            # TikTok uses a contenteditable div, not a real <input>
+            # Use keyboard typing instead of fill()
+            await page.keyboard.type(text, delay=50)
+            logger.debug("Typed comment text.")
+            await page.wait_for_timeout(500)
+
+            post_btn = page.locator(_SEL.comment_post_button).first
+            if await post_btn.count() > 0:
+                await post_btn.click()
+                logger.info("Comment posted.")
+                await page.wait_for_timeout(2000)
+            else:
+                # Fallback: press Enter
+                await input_el.press("Enter")
+                logger.info("Comment posted via Enter.")
+                await page.wait_for_timeout(2000)
+        except Exception as exc:
+            logger.warning("Failed to post comment: %s", exc)
 
     async def _extract_comments(self, page: Page) -> list:
         """
