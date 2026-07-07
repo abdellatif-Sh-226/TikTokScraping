@@ -110,7 +110,11 @@ async def _amain() -> None:
 
         # If --no-save, print JSON to stdout
         if args.no_save:
-            print(result.model_dump_json(indent=2))
+            try:
+                print(result.model_dump_json(indent=2))
+            except UnicodeEncodeError:
+                sys.stdout.reconfigure(encoding="utf-8")
+                print(result.model_dump_json(indent=2))
 
     except Exception:
         logger.exception("Fatal error during scraping.")

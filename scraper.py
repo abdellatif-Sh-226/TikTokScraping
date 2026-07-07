@@ -1,20 +1,17 @@
 """
 Playwright-based TikTok scraper.
 
-Provides the ``TikTokScraper`` class which can extract:
-- Profile information (bio, stats, avatar, recent video tiles).
-- Video detail information (description, engagement stats, sound, upload date).
-
-Uses a persistent browser context for session reuse and implements
-automatic scrolling, retry logic, and centralised selector management.
+Extracts structured data from TikTok's embedded ``__UNIVERSAL_DATA_FOR_REHYDRATION__``
+JSON (stable across frontend changes) and falls back to DOM scraping only
+for dynamically loaded content (comments and profile video tiles).
 """
 
 import asyncio
 import json
-import os
 import re
+from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 from urllib.parse import urlparse
 
 from playwright.async_api import (
@@ -28,108 +25,30 @@ from playwright.async_api import (
 
 from config import CONFIG, Config
 from models import Comment, Profile, VideoDetail, VideoTile
-from utils import async_retry, get_logger, save_json
+from utils import get_logger, save_json
 
 logger = get_logger(__name__)
-
-# ---------------------------------------------------------------------------
-# URL helpers
-# ---------------------------------------------------------------------------
 
 _TIKTOK_DOMAINS = {"tiktok.com", "www.tiktok.com"}
 
 
-def _is_profile_url(url: str) -> bool:
-    """Return ``True`` if *url* looks like a TikTok profile page."""
-    parsed = urlparse(url)
-    if parsed.netloc not in _TIKTOK_DOMAINS:
-        return False
-    # Profile URLs: /@username  or  /@username/
-    return bool(re.match(r"/@[\w.]+", parsed.path))
-
-
-def _is_video_url(url: str) -> bool:
-    """Return ``True`` if *url* looks like a TikTok video detail page."""
-    parsed = urlparse(url)
-    if parsed.netloc not in _TIKTOK_DOMAINS:
-        return False
-    # Video URLs: /@username/video/1234567890  or  /video/1234567890
-    return bool(re.search(r"/video/\d+", parsed.path))
-
-
 def _extract_video_id(url: str) -> str:
-    """Extract the numeric video ID from a TikTok video URL."""
     match = re.search(r"/video/(\d+)", url)
     return match.group(1) if match else ""
 
 
 def _extract_username(url: str) -> str:
-    """Extract the @username from a TikTok profile URL."""
     parsed = urlparse(url)
     match = re.match(r"/@([\w.]+)", parsed.path)
     return match.group(1) if match else ""
 
 
-# ---------------------------------------------------------------------------
-# Selector helpers
-# ---------------------------------------------------------------------------
-
 _SEL = CONFIG.selectors
-
-
-async def _safe_text(page: Page, selector: str, default: str = "") -> str:
-    """
-    Return the ``.inner_text()`` of *selector*, or *default* if missing.
-
-    Never raises – all exceptions are caught and result in the default.
-    """
-    if not selector:
-        return default
-    try:
-        el = await page.wait_for_selector(selector, timeout=CONFIG.timeout.element_appear)
-        if el:
-            return (await el.inner_text()).strip()
-    except (PlaywrightTimeout, AttributeError):
-        pass
-    return default
-
-
-async def _safe_attr(page: Page, selector: str, attr: str, default: Optional[str] = None) -> Optional[str]:
-    """Return an attribute value from *selector*, or *default* if missing."""
-    if not selector:
-        return default
-    try:
-        el = await page.wait_for_selector(selector, timeout=CONFIG.timeout.element_appear)
-        if el:
-            return await el.get_attribute(attr)
-    except (PlaywrightTimeout, AttributeError):
-        pass
-    return default
-
-
-async def _safe_count(page: Page, selector: str) -> int:
-    """Return the number of elements matching *selector*."""
-    return await page.locator(selector).count()
-
-
-# ---------------------------------------------------------------------------
-# Main scraper class
-# ---------------------------------------------------------------------------
 
 
 class TikTokScraper:
     """
-    High-level TikTok scraper built on Playwright.
-
-    Usage::
-
-        async with TikTokScraper() as scraper:
-            profile = await scraper.scrape_profile("https://www.tiktok.com/@username")
-            video   = await scraper.scrape_video("https://www.tiktok.com/@username/video/1234567890")
-
-    The scraper uses a **persistent browser context** (cookies, local storage)
-    stored in ``Config.user_data_dir``, so subsequent runs benefit from
-    cached sessions and are less likely to be rate-limited.
+    High-level TikTok scraper built on Playwright and embedded JSON data.
     """
 
     def __init__(self, config: Config | None = None, captcha_wait: int = 0) -> None:
@@ -138,10 +57,6 @@ class TikTokScraper:
         self._playwright: Optional[Playwright] = None
         self._browser: Optional[Browser] = None
         self._context: Optional[BrowserContext] = None
-
-    # ------------------------------------------------------------------
-    # Lifecycle
-    # ------------------------------------------------------------------
 
     async def __aenter__(self) -> "TikTokScraper":
         await self.start()
@@ -155,7 +70,6 @@ class TikTokScraper:
         logger.info("Starting TikTokScraper …")
         self._playwright = await async_playwright().start()
 
-        # Anti-detection launch args to bypass headless blocking
         launch_args = [
             "--disable-blink-features=AutomationControlled",
             "--no-sandbox",
@@ -168,7 +82,6 @@ class TikTokScraper:
             args=launch_args,
         )
 
-        # Load saved session (cookies + localStorage) if available
         storage_state = None
         state_path = Path(self._config.storage_state_file)
         if state_path.exists():
@@ -214,46 +127,60 @@ class TikTokScraper:
             logger.warning("Failed to save session: %s", exc)
 
     # ------------------------------------------------------------------
+    # Embedded JSON extraction
+    # ------------------------------------------------------------------
+
+    async def _extract_embedded_json(self, page: Page) -> dict:
+        data = await page.evaluate("""() => {
+            const el = document.getElementById("__UNIVERSAL_DATA_FOR_REHYDRATION__");
+            if (!el) return null;
+            try { return JSON.parse(el.innerText); }
+            catch { return null; }
+        }""")
+        if not data:
+            logger.warning("Could not find __UNIVERSAL_DATA_FOR_REHYDRATION__ in page.")
+            return {}
+        return data.get("__DEFAULT_SCOPE__", {})
+
+    # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
 
     async def scrape_profile(self, url: str, save: bool = True) -> Profile:
-        """
-        Scrape a TikTok profile page and return a ``Profile`` instance.
-
-        Parameters
-        ----------
-        url:
-            Full profile URL, e.g. ``https://www.tiktok.com/@username``.
-        save:
-            If ``True`` (default), write the result to a JSON file.
-        """
         username = _extract_username(url)
         logger.info("Scraping profile: %s", url)
 
-        page = await self._context.new_page()  # type: ignore[union-attr]
+        page = await self._context.new_page()
         try:
             await self._navigate(page, url)
-            # If --captcha-wait was given, pause here for manual solving
             if self._captcha_wait:
                 logger.info("Waiting %d s for manual CAPTCHA solving …", self._captcha_wait)
                 await page.wait_for_timeout(self._captcha_wait * 1000)
             await self._dismiss_cookie_banner(page)
+
+            scope = await self._extract_embedded_json(page)
+            user_data = scope.get("webapp.user-detail", {})
+            user_info = user_data.get("userInfo", {})
+            user = user_info.get("user", {})
+            stats = user_info.get("stats", {})
+
             await self._click_videos_tab(page)
             await self._scroll_for_content(page)
             await page.wait_for_timeout(2000)
 
+            recent_videos = await self._extract_video_tiles(page)
+
             profile = Profile(
                 url=url,
                 username=username,
-                nickname=await _safe_text(page, _SEL.nickname),
-                avatar=await _safe_attr(page, _SEL.avatar, "src"),
-                bio=await _safe_text(page, _SEL.bio),
-                follower_count=await _safe_text(page, _SEL.follower_count),
-                following_count=await _safe_text(page, _SEL.following_count),
-                like_count=await _safe_text(page, _SEL.like_count),
-                video_count=await _safe_text(page, _SEL.video_count),
-                recent_videos=await self._extract_video_tiles(page),
+                nickname=user.get("nickname", ""),
+                avatar=user.get("avatarLarger") or user.get("avatarMedium") or user.get("avatarThumb"),
+                bio=user.get("signature", ""),
+                follower_count=str(stats.get("followerCount", "")),
+                following_count=str(stats.get("followingCount", "")),
+                like_count=str(stats.get("heartCount", "") or stats.get("heart", "")),
+                video_count=str(stats.get("videoCount", "")),
+                recent_videos=recent_videos,
             )
 
             logger.info(
@@ -275,57 +202,71 @@ class TikTokScraper:
         self, url: str, save: bool = True,
         like: bool = False, comment: str = "",
     ) -> VideoDetail:
-        """
-        Scrape a TikTok video detail page and return a ``VideoDetail`` instance.
-
-        Parameters
-        ----------
-        url:
-            Full video URL, e.g.
-            ``https://www.tiktok.com/@username/video/1234567890``.
-        save:
-            If ``True`` (default), write the result to a JSON file.
-        like:
-            If ``True``, click the like button on the video.
-        comment:
-            If non-empty, post this comment on the video.
-        """
         video_id = _extract_video_id(url)
         logger.info("Scraping video: %s", url)
 
-        page = await self._context.new_page()  # type: ignore[union-attr]
+        page = await self._context.new_page()
         try:
             await self._navigate(page, url)
-            # If --captcha-wait was given, pause here for manual solving
             if self._captcha_wait:
                 logger.info("Waiting %d s for manual CAPTCHA solving …", self._captcha_wait)
                 await page.wait_for_timeout(self._captcha_wait * 1000)
             await self._dismiss_cookie_banner(page)
 
-            # Like the video if requested
+            scope = await self._extract_embedded_json(page)
+            video_data = scope.get("webapp.video-detail", {})
+            item = video_data.get("itemInfo", {}).get("itemStruct", {})
+            stats = item.get("stats", {})
+            author = item.get("author", {})
+            music = item.get("music", {})
+
+            plays = str(stats.get("playCount", ""))
+            likes = str(stats.get("diggCount", ""))
+            comments_count = str(stats.get("commentCount", ""))
+            shares = str(stats.get("shareCount", ""))
+            saves = str(stats.get("collectCount", ""))
+
+            author_id = author.get("uniqueId", "")
+            author_avatar = author.get("avatarLarger") or author.get("avatarMedium") or author.get("avatarThumb")
+
+            sound_title = music.get("title", "")
+            sound_author = music.get("authorName", "")
+            sound = f"{sound_title} - {sound_author}" if sound_title and sound_author else (sound_title or sound_author or "")
+
+            create_time = item.get("createTime", "")
+            if create_time:
+                try:
+                    date_str = datetime.utcfromtimestamp(int(create_time)).strftime("%Y-%m-%d %H:%M:%S")
+                except (ValueError, TypeError):
+                    date_str = str(create_time)
+            else:
+                date_str = ""
+
+            description = item.get("desc", "")
+
             if like:
                 await self._like_video(page)
 
-            # Open comments panel if we need to comment or scrape comments
+            comments_data = await self._extract_comments(page, video_id)
+
             if comment:
+                # Try to open panel and post comment even if extraction failed
                 await self._open_comments_panel(page)
                 await self._comment_on_video(page, comment)
-
-            comments_data = await self._extract_comments(page)
 
             video = VideoDetail(
                 url=url,
                 id=video_id,
-                description=await _safe_text(page, _SEL.video_desc),
-                author_username=await _safe_text(page, _SEL.video_author),
-                author_avatar=await _safe_attr(page, _SEL.video_author_avatar, "src"),
-                plays=await _safe_text(page, _SEL.video_plays),
-                likes=await _safe_text(page, _SEL.video_likes),
-                comments=await _safe_text(page, _SEL.video_comments),
-                shares=await _safe_text(page, _SEL.video_shares),
-                saves=await _safe_text(page, _SEL.video_saves),
-                sound=await _safe_text(page, _SEL.video_sound),
-                date=await _safe_text(page, _SEL.video_date),
+                description=description,
+                author_username=author_id,
+                author_avatar=author_avatar,
+                plays=plays,
+                likes=likes,
+                comments=comments_count,
+                shares=shares,
+                saves=saves,
+                sound=sound,
+                date=date_str,
                 comments_list=comments_data,
             )
 
@@ -349,14 +290,8 @@ class TikTokScraper:
     # Internal helpers
     # ------------------------------------------------------------------
 
-    @async_retry()
-    async def _navigate(self, page: Page, url: str) -> None:
-        """
-        Navigate to *url* and wait for the page to reach a loadable state.
-
-        Raises ``PlaywrightTimeout`` if the page does not load within
-        ``Config.timeout.page_load`` milliseconds.
-        """
+    @staticmethod
+    async def _navigate(page: Page, url: str) -> None:
         logger.debug("Navigating to %s", url)
         try:
             await page.goto(url, wait_until="domcontentloaded", timeout=CONFIG.timeout.page_load)
@@ -364,11 +299,6 @@ class TikTokScraper:
             logger.warning("Page load timeout for %s – continuing with partial DOM.", url)
 
     async def _dismiss_cookie_banner(self, page: Page) -> None:
-        """
-        Try to detect and dismiss the TikTok cookie consent banner.
-
-        This is a best-effort step – failure is non-fatal.
-        """
         dismiss_selectors = [
             _SEL.cookie_reject,
             _SEL.cookie_decline,
@@ -381,25 +311,16 @@ class TikTokScraper:
                 if btn:
                     await btn.click()
                     logger.debug("Cookie banner dismissed via '%s'.", sel)
-                    # Short pause so the banner animation completes
                     await asyncio.sleep(0.5)
                 return
             except (PlaywrightTimeout, Exception):
                 continue
 
     async def _click_videos_tab(self, page: Page) -> None:
-        """
-        Click the "Videos" tab on a profile page to ensure the video
-        grid is active before scrolling.
-
-        TikTok profiles may have multiple tabs (Videos, Drama, Repost,
-        Liked). The video grid only loads when the Videos tab is selected.
-        """
-        tab_selector = _SEL.videos_tab
-        if not tab_selector:
+        if not _SEL.videos_tab:
             return
         try:
-            tab = await page.wait_for_selector(tab_selector, timeout=CONFIG.timeout.element_appear)
+            tab = await page.wait_for_selector(_SEL.videos_tab, timeout=CONFIG.timeout.element_appear)
             if tab:
                 is_active = await tab.get_attribute("aria-selected")
                 if is_active != "true":
@@ -412,15 +333,6 @@ class TikTokScraper:
             logger.debug("Videos tab not found or not clickable.")
 
     async def _scroll_for_content(self, page: Page) -> None:
-        """
-        Scroll the page down repeatedly to trigger lazy-loading.
-
-        TikTok's profile page loads the video grid only after the user
-        scrolls near the bottom. This method scrolls repeatedly and only
-        stops when the page *stays* the same height for several
-        consecutive attempts while at the bottom of the page.
-        """
-        stalled_count = 0
         consecutive_same_height = 0
         prev_height = 0
 
@@ -435,9 +347,6 @@ class TikTokScraper:
             else:
                 consecutive_same_height = 0
 
-            # Stop only after at least 5 scrolls AND same height for
-            # 5 consecutive attempts. TikTok requires multiple scroll
-            # events even when at the page bottom to trigger lazy loading.
             if i >= 4 and consecutive_same_height >= 5:
                 logger.debug("Scroll finished after %d steps.", i + 1)
                 break
@@ -447,13 +356,6 @@ class TikTokScraper:
             logger.debug("Reached max scrolls.", self._config.scroll.max_scrolls)
 
     async def _extract_video_tiles(self, page: Page) -> list:
-        """
-        Extract video tile metadata from the profile-page video grid.
-
-        Uses Locator methods (scoped to each tile) to avoid
-        cross-contamination between tiles.
-        Returns a list of ``VideoTile`` instances.
-        """
         tiles = page.locator(_SEL.video_tiles)
         count = await tiles.count()
         logger.debug("Found %d video tiles.", count)
@@ -461,7 +363,6 @@ class TikTokScraper:
         for i in range(count):
             tile = tiles.nth(i)
             try:
-                # Extract URL from the <a> inside the tile
                 link_el = tile.locator(_SEL.video_tile_link).first
                 href = await link_el.get_attribute("href") or ""
                 full_url = (
@@ -470,11 +371,9 @@ class TikTokScraper:
                     else href
                 )
 
-                # Extract cover image
                 cover = tile.locator(_SEL.video_tile_cover).first
                 cover_src = await cover.get_attribute("src")
 
-                # Extract description and plays — scoped to this tile
                 desc = ""
                 if _SEL.video_tile_desc:
                     desc_el = tile.locator(_SEL.video_tile_desc).first
@@ -500,35 +399,125 @@ class TikTokScraper:
                 continue
         return results
 
-    async def _open_comments_panel(self, page: Page) -> None:
-        """
-        Click the comment button to open the comments sidebar/panel.
+    # ------------------------------------------------------------------
+    # Comments
+    # ------------------------------------------------------------------
 
-        On TikTok video pages, comments are NOT in the initial DOM.
-        Clicking the comment count or icon opens a side panel that loads
-        comments via API. This method clicks that button and waits.
+    async def _open_comments_panel(self, page: Page) -> bool:
         """
-        for sel in [_SEL.comment_open_icon, _SEL.video_comments]:
+        Try to open the comments panel by clicking various selectors.
+
+        Returns True if the panel was likely opened.
+        """
+        click_selectors = [
+            _SEL.comment_open_icon,
+            _SEL.comment_input,
+            '[data-e2e="comment-count"]',
+            '[data-e2e="comment-icon"]',
+            'button:has([data-e2e*="comment" i])',
+        ]
+
+        for sel in click_selectors:
+            if not sel:
+                continue
             try:
                 btn = page.locator(sel).first
                 if await btn.count() > 0:
                     await btn.scroll_into_view_if_needed()
-                    await page.wait_for_timeout(500)
+                    await page.wait_for_timeout(300)
                     await btn.click(force=True)
                     logger.debug("Opened comments via '%s'.", sel)
                     await page.wait_for_timeout(4000)
-                    return
+                    return True
             except Exception:
                 continue
-        logger.debug("Could not find comment button to click.")
+
+        logger.debug("Could not find any comment button to click.")
+        return False
+
+    async def _scrape_comment_dom(self, page: Page) -> list:
+        """Extract comments from rendered DOM after panel is open."""
+        results: list = []
+        wrappers = page.locator(_SEL.comment_wrapper)
+        count = await wrappers.count()
+        logger.debug("Found %d comment wrappers in DOM.", count)
+
+        for i in range(count):
+            try:
+                wrapper = wrappers.nth(i)
+
+                author = ""
+                author_el = wrapper.locator(_SEL.comment_author).first
+                if await author_el.count():
+                    author = (await author_el.inner_text()).strip()
+
+                avatar = None
+                avatar_el = wrapper.locator(_SEL.comment_author_avatar).first
+                if await avatar_el.count():
+                    avatar = await avatar_el.get_attribute("src")
+
+                text = ""
+                text_el = wrapper.locator(_SEL.comment_text).first
+                if await text_el.count():
+                    text = (await text_el.inner_text()).strip()
+
+                if text:
+                    results.append(Comment(author_username=author, author_avatar=avatar, text=text))
+            except Exception as exc:
+                logger.debug("Skipping comment wrapper %d: %s", i, exc)
+                continue
+
+        return results
+
+    async def _fetch_comments_api(self, page: Page, video_id: str) -> list:
+        """
+        Fallback: call the TikTok comment API from the browser context
+        (uses the page's cookies and CSRF tokens).
+        """
+        try:
+            data = await page.evaluate(f"""async () => {{
+                try {{
+                    const r = await fetch(
+                        "https://www.tiktok.com/api/comment/list/?aweme_id={video_id}&count=50&cursor=0",
+                        {{ credentials: "include", headers: {{ "Referer": "https://www.tiktok.com/" }} }}
+                    );
+                    const d = await r.json();
+                    if (d.status_code !== 0) return {{ error: "status_code " + d.status_code }};
+                    return d;
+                }} catch(e) {{ return {{ error: e.toString() }}; }}
+            }}""")
+
+            if "error" in data:
+                logger.debug("Comment API fallback failed: %s", data["error"])
+                return []
+
+            comments_data = data.get("comments", [])
+            if not comments_data:
+                logger.debug("Comment API returned no comments.")
+                return []
+
+            logger.debug("Fetched %d comments via API.", len(comments_data))
+            results = []
+            for c in comments_data:
+                user = c.get("user", {}) or {}
+                results.append(Comment(
+                    author_username=user.get("uniqueId", "") or user.get("nickname", ""),
+                    author_avatar=user.get("avatarLarger") or user.get("avatarThumb"),
+                    text=c.get("text", ""),
+                    likes=str(c.get("diggCount", c.get("likes", ""))),
+                    replies_count=str(c.get("replyCount", c.get("reply_comment_total", ""))),
+                ))
+            return results
+
+        except Exception as exc:
+            logger.debug("Comment API fallback threw: %s", exc)
+            return []
+
+    # ------------------------------------------------------------------
+    # Interactions
+    # ------------------------------------------------------------------
 
     async def _like_video(self, page: Page) -> None:
-        """
-        Click the like button on the video page.
-
-        Checks if the video is already liked (aria-pressed="true")
-        and skips if so.
-        """
         try:
             btn = page.locator(_SEL.like_button).first
             if await btn.count() == 0:
@@ -546,12 +535,6 @@ class TikTokScraper:
             logger.warning("Failed to like video: %s", exc)
 
     async def _comment_on_video(self, page: Page, text: str) -> None:
-        """
-        Type and post a comment on the video.
-
-        The comments panel must already be open (call
-        ``_open_comments_panel`` beforehand).
-        """
         try:
             input_el = page.locator(_SEL.comment_input).first
             if await input_el.count() == 0:
@@ -561,8 +544,6 @@ class TikTokScraper:
             await input_el.click()
             await page.wait_for_timeout(500)
 
-            # TikTok uses a contenteditable div, not a real <input>
-            # Use keyboard typing instead of fill()
             await page.keyboard.type(text, delay=50)
             logger.debug("Typed comment text.")
             await page.wait_for_timeout(500)
@@ -573,60 +554,31 @@ class TikTokScraper:
                 logger.info("Comment posted.")
                 await page.wait_for_timeout(2000)
             else:
-                # Fallback: press Enter
                 await input_el.press("Enter")
                 logger.info("Comment posted via Enter.")
                 await page.wait_for_timeout(2000)
         except Exception as exc:
             logger.warning("Failed to post comment: %s", exc)
 
-    async def _extract_comments(self, page: Page) -> list:
+    async def _extract_comments(self, page: Page, video_id: str) -> list:
         """
-        Extract comments from the page after the comment panel has opened.
+        Extract comments from the video page.
 
-        Iterates over each comment wrapper div and extracts:
-        - author username (from p.TUXText--weight-medium)
-        - author avatar (from img)
-        - comment text (from span.TUXText--weight-normal)
+        Tries multiple strategies in order:
+          1. Click the comment button and scrape the rendered DOM
+          2. Fetch comments via TikTok API using the page context
         """
-        results: list = []
+        # Strategy 1: open comment panel and scrape DOM
+        panel_opened = await self._open_comments_panel(page)
+        if panel_opened:
+            dom_comments = await self._scrape_comment_dom(page)
+            if dom_comments:
+                return dom_comments
 
-        wrappers = page.locator(_SEL.comment_wrapper)
-        count = await wrappers.count()
-        logger.debug("Found %d comment wrappers.", count)
+        # Strategy 2: try API fetch from page context
+        logger.debug("DOM comment extraction failed, trying API fallback …")
+        api_comments = await self._fetch_comments_api(page, video_id)
+        if api_comments:
+            return api_comments
 
-        for i in range(count):
-            try:
-                wrapper = wrappers.nth(i)
-
-                # Author username
-                author = ""
-                author_el = wrapper.locator(_SEL.comment_author).first
-                if await author_el.count():
-                    author = (await author_el.inner_text()).strip()
-
-                # Author avatar
-                avatar = None
-                avatar_el = wrapper.locator(_SEL.comment_author_avatar).first
-                if await avatar_el.count():
-                    avatar = await avatar_el.get_attribute("src")
-
-                # Comment text
-                text = ""
-                text_el = wrapper.locator(_SEL.comment_text).first
-                if await text_el.count():
-                    text = (await text_el.inner_text()).strip()
-
-                if text:
-                    results.append(
-                        Comment(
-                            author_username=author,
-                            author_avatar=avatar,
-                            text=text,
-                        )
-                    )
-            except Exception as exc:
-                logger.debug("Skipping comment wrapper %d: %s", i, exc)
-                continue
-
-        return results
+        return []

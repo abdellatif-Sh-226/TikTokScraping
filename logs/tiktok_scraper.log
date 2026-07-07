@@ -453,3 +453,163 @@ Call log:
 2026-07-06 13:09:57 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658842984875576594.json
 2026-07-06 13:09:58 | INFO     | scraper | Session saved to tiktok_session.json
 2026-07-06 13:09:58 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:33:46 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:33:48 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:33:49 | INFO     | scraper | Browser context created.
+2026-07-07 13:33:49 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:33:49 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:34:05 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:34:56 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:34:58 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:34:58 | INFO     | scraper | Browser context created.
+2026-07-07 13:34:58 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:34:58 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:35:17 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:36:07 | INFO     | scraper | Video scraped: 7655659709256568095 —  plays, 38 likes, 0 comments.
+2026-07-07 13:36:08 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:36:08 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:36:52 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:36:52 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:36:53 | INFO     | scraper | Browser context created.
+2026-07-07 13:36:53 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:36:53 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:37:06 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:37:47 | INFO     | scraper | Video scraped: 7658298807527935262 —  plays, 168 likes, 0 comments.
+2026-07-07 13:37:47 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:37:47 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:51:46 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:51:46 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:51:46 | INFO     | scraper | Browser context created.
+2026-07-07 13:51:46 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:51:46 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:52:00 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 13:52:00 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:52:00 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 13:52:00 | ERROR    | __main__ | Fatal error during scraping.
+Traceback (most recent call last):
+  File "C:\Users\wess\Desktop\python get data\main.py", line 113, in _amain
+    print(result.model_dump_json(indent=2))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wess\AppData\Local\Programs\Python\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f338' in position 648: character maps to <undefined>
+2026-07-07 13:52:01 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:52:01 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:52:16 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:52:17 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:52:17 | INFO     | scraper | Browser context created.
+2026-07-07 13:52:17 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:52:17 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:52:30 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 13:52:30 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:52:30 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 13:52:30 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:52:30 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:52:36 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:52:37 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:52:37 | INFO     | scraper | Browser context created.
+2026-07-07 13:52:37 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:52:37 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:52:50 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 13:52:50 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:52:50 | INFO     | scraper | Video scraped: 7655659709256568095 — 1242 plays, 38 likes, 0 comments.
+2026-07-07 13:52:50 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:52:51 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:52:57 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:52:57 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:52:57 | INFO     | scraper | Browser context created.
+2026-07-07 13:52:57 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@gingufb
+2026-07-07 13:52:57 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb
+2026-07-07 13:53:10 | DEBUG    | scraper | Videos tab already active.
+2026-07-07 13:53:22 | DEBUG    | scraper | Scroll finished after 6 steps.
+2026-07-07 13:53:24 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-07 13:53:24 | INFO     | scraper | Profile scraped: @gingufb — 10300 followers, 0 video tiles.
+2026-07-07 13:53:25 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:53:25 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:54:25 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:54:26 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:54:26 | INFO     | scraper | Browser context created.
+2026-07-07 13:54:26 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:54:26 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7655659709256568095
+2026-07-07 13:54:44 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 13:54:44 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:54:44 | INFO     | scraper | Video scraped: 7655659709256568095 — 1242 plays, 38 likes, 0 comments.
+2026-07-07 13:54:44 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:54:44 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:54:45 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:54:45 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:54:45 | INFO     | scraper | Browser context created.
+2026-07-07 13:54:45 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:54:46 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 13:55:00 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 13:55:00 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 13:55:00 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 13:55:00 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:55:00 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 13:55:01 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 13:55:01 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 13:55:01 | INFO     | scraper | Browser context created.
+2026-07-07 13:55:01 | INFO     | scraper | Scraping profile: https://www.tiktok.com/@gingufb
+2026-07-07 13:55:02 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb
+2026-07-07 13:55:20 | DEBUG    | scraper | Videos tab already active.
+2026-07-07 13:55:32 | DEBUG    | scraper | Scroll finished after 6 steps.
+2026-07-07 13:55:34 | DEBUG    | scraper | Found 0 video tiles.
+2026-07-07 13:55:34 | INFO     | scraper | Profile scraped: @gingufb — 10300 followers, 0 video tiles.
+2026-07-07 13:55:35 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 13:55:35 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 14:08:35 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 14:08:35 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 14:08:36 | INFO     | scraper | Browser context created.
+2026-07-07 14:08:36 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:08:36 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:08:51 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 14:08:51 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 14:08:51 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 14:08:51 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 14:08:52 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 14:28:49 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 14:28:49 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 14:28:50 | INFO     | scraper | Browser context created.
+2026-07-07 14:28:50 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:28:50 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:29:07 | DEBUG    | scraper | Could not find comment button to click.
+2026-07-07 14:29:07 | DEBUG    | scraper | Found 0 comment wrappers.
+2026-07-07 14:29:07 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 14:29:07 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658298807527935262.json
+2026-07-07 14:29:08 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 14:29:08 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 14:36:26 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 14:36:27 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 14:36:27 | INFO     | scraper | Browser context created.
+2026-07-07 14:36:27 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:36:27 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:36:40 | DEBUG    | scraper | Could not find any comment button to click.
+2026-07-07 14:36:40 | DEBUG    | scraper | DOM comment extraction failed, trying API fallback …
+2026-07-07 14:36:41 | DEBUG    | scraper | Comment API fallback failed: status_code 5
+2026-07-07 14:36:41 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 14:36:41 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 14:36:41 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 14:39:48 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 14:39:49 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 14:39:49 | INFO     | scraper | Browser context created.
+2026-07-07 14:39:49 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:39:49 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:40:05 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-07 14:40:09 | DEBUG    | scraper | Found 2 comment wrappers in DOM.
+2026-07-07 14:40:09 | DEBUG    | scraper | DOM comment extraction failed, trying API fallback …
+2026-07-07 14:40:09 | DEBUG    | scraper | Comment API fallback failed: status_code 5
+2026-07-07 14:40:09 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 0 comments.
+2026-07-07 14:40:10 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 14:40:10 | INFO     | scraper | TikTokScraper stopped.
+2026-07-07 14:40:39 | INFO     | scraper | Starting TikTokScraper …
+2026-07-07 14:40:39 | INFO     | scraper | Loaded saved session from tiktok_session.json
+2026-07-07 14:40:40 | INFO     | scraper | Browser context created.
+2026-07-07 14:40:40 | INFO     | scraper | Scraping video: https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:40:40 | DEBUG    | scraper | Navigating to https://www.tiktok.com/@gingufb/video/7658298807527935262
+2026-07-07 14:40:55 | DEBUG    | scraper | Opened comments via '[data-e2e="comment-icon"]'.
+2026-07-07 14:40:59 | DEBUG    | scraper | Found 2 comment wrappers in DOM.
+2026-07-07 14:40:59 | INFO     | scraper | Video scraped: 7658298807527935262 — 11400 plays, 168 likes, 2 comments.
+2026-07-07 14:40:59 | INFO     | utils | Data saved to C:\Users\wess\Desktop\python get data\output\video_7658298807527935262.json
+2026-07-07 14:40:59 | INFO     | scraper | Session saved to tiktok_session.json
+2026-07-07 14:41:00 | INFO     | scraper | TikTokScraper stopped.
